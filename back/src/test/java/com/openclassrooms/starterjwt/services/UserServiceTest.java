@@ -31,7 +31,7 @@ public class UserServiceTest {
 
   @BeforeEach
   public void init() {
-    user = User.builder().id((long) 4).email("johnDoe@live.fr").lastName("Doe").firstName("John").password("pwd")
+    user = User.builder().id(1L).email("johnDoe@live.fr").lastName("Doe").firstName("John").password("pwd")
         .admin(false).build();
   }
 
