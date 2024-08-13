@@ -165,8 +165,10 @@ public class SessionServiceTest {
   public void noLongerParticipate_shouldRemoveUserFromSession() {
     User user = new User();
     user.setId(1L);
+    User user2 = new User();
+    user2.setId(2L);
     Session session = new Session();
-    session.setUsers(Arrays.asList(user));
+    session.setUsers(Arrays.asList(user2, user));
 
     when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
     
