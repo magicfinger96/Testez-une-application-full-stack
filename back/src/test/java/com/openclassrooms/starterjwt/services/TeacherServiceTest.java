@@ -18,6 +18,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.openclassrooms.starterjwt.models.Teacher;
 import com.openclassrooms.starterjwt.repository.TeacherRepository;
 
+/**
+ * Class that tests TeacherService
+ */
 @ExtendWith(MockitoExtension.class)
 public class TeacherServiceTest {
 
@@ -29,11 +32,19 @@ public class TeacherServiceTest {
   
   private Teacher teacher;
   
+  /**
+   * Creates a teacher before each test named John Doe
+   * with id 1.
+   */
   @BeforeEach
   public void init() {
     teacher = Teacher.builder().id(1L).lastName("Doe").firstName("John").build();
   }
   
+  /**
+   * Tests that the findById method
+   * returns a teacher and use teacherRepository.findById().
+   */
   @Test
   public void findById_shouldReturnTeacher() {
     when(teacherRepository.findById(teacher.getId())).thenReturn(Optional.of(teacher));
@@ -44,6 +55,10 @@ public class TeacherServiceTest {
     assertThat(existingTeacher).isNotNull();
   }
   
+  /**
+   * Tests that the findAll method
+   * returns all the teachers and use teacherRepository.findAll().
+   */
   @Test
   public void findAll_shouldReturnTeachers() {
     
