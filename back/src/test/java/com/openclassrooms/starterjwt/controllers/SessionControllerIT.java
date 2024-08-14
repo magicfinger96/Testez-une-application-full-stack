@@ -145,6 +145,22 @@ public class SessionControllerIT {
     mockMvc
         .perform(MockMvcRequestBuilders.post("/api/session")
             .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(sessionDto)))
+
+  /**
+   * Tests that update method returns a 200 response with the updated session.
+   * 
+   * @throws Exception if simulated call to the end point fails.
+   */
+  @Test
+  @WithMockUser
+  public void update_shouldSucceedRequestWithASession() throws Exception {
+    when(sessionService.update(1L, session)).thenReturn(session);
+    when(sessionMapper.toEntity(sessionDto)).thenReturn(session);
+    when(sessionMapper.toDto(session)).thenReturn(sessionDto);
+
+    mockMvc
+        .perform(MockMvcRequestBuilders.put("/api/session/" + 1).contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(sessionDto)))
         .andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(sessionDto)));
   }
 
