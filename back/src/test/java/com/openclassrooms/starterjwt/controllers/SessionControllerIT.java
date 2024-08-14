@@ -52,7 +52,6 @@ public class SessionControllerIT {
    */
   @BeforeEach
   private void init() {
-
     session = Session.builder().id(1L).name("Session name").date(new Date()).description("Description of the session")
         .teacher(null).users(null).build();
 
@@ -84,14 +83,14 @@ public class SessionControllerIT {
   }
 
   /**
-   * Tests that findById returns a 200 response with a session with given id.
+   * Tests that findById method returns a 200 response with a session with given
+   * id.
    * 
    * @throws Exception if simulated call to the end point fails.
    */
   @Test
   @WithMockUser
   public void findById_shouldSucceedRequestWithASession() throws Exception {
-
     Long id = session.getId();
 
     when(sessionService.getById(Long.valueOf(id))).thenReturn(session);
@@ -102,29 +101,27 @@ public class SessionControllerIT {
   }
 
   /**
-   * Tests that findById returns a bad request response when the given id is
-   * malformed.
+   * Tests that findById method returns a bad request response when the given id
+   * is malformed.
    * 
    * @throws Exception if simulated call to the end point fails.
    */
   @Test
   @WithMockUser
   public void findById_shouldReturnBadRequest_whenMalformedId() throws Exception {
-
     mockMvc.perform(MockMvcRequestBuilders.get("/api/session/one").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isBadRequest());
   }
 
   /**
-   * Tests that findById returns a not found response when the session with the
-   * given id doesn't exist.
+   * Tests that findById method returns a not found response when the session with
+   * the given id doesn't exist.
    * 
    * @throws Exception if simulated call to the end point fails.
    */
   @Test
   @WithMockUser
   public void findById_shouldReturnNotFound_whenSessionDoesntExist() throws Exception {
-
     Long id = 2L;
 
     when(sessionService.getById(id)).thenReturn(null);
