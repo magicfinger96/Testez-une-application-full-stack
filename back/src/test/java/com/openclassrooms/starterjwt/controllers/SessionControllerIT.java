@@ -133,4 +133,22 @@ public class SessionControllerIT {
         .andExpect(status().isNotFound());
   }
 
+  /**
+   * Tests that create method returns a 200 response with the created session.
+   * 
+   * @throws Exception if simulated call to the end point fails.
+   */
+  @Test
+  @WithMockUser
+  public void create_shouldSucceedRequestWithASession() throws Exception {
+    when(sessionService.create(session)).thenReturn(session);
+    when(sessionMapper.toEntity(sessionDto)).thenReturn(session);
+    when(sessionMapper.toDto(session)).thenReturn(sessionDto);
+
+    mockMvc
+        .perform(MockMvcRequestBuilders.post("/api/session")
+            .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(sessionDto)))
+        .andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(sessionDto)));
+  }
+
 }
