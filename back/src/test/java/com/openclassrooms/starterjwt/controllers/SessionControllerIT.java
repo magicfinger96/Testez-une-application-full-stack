@@ -165,5 +165,21 @@ public class SessionControllerIT {
             .content(objectMapper.writeValueAsString(sessionDto)))
         .andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(sessionDto)));
   }
+  
+  /**
+   * Tests that update method returns a bad request response when the given id
+   * is malformed.
+   * 
+   * @throws Exception if simulated call to the end point fails.
+   */
+  @Test
+  @WithMockUser
+  public void update_shouldReturnBadRequest_whenMalformedId() throws Exception {
+    when(sessionMapper.toDto(session)).thenReturn(sessionDto);
+    
+    mockMvc.perform(MockMvcRequestBuilders.put("/api/session/one").contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(sessionDto)))
+        .andExpect(status().isBadRequest());
+  }
 
 }
