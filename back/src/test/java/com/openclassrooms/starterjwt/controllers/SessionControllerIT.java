@@ -165,20 +165,110 @@ public class SessionControllerIT {
             .content(objectMapper.writeValueAsString(sessionDto)))
         .andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(sessionDto)));
   }
-  
+
   /**
-   * Tests that update method returns a bad request response when the given id
-   * is malformed.
+   * Tests that update method returns a bad request response when the given id is
+   * malformed.
    * 
    * @throws Exception if simulated call to the end point fails.
    */
   @Test
   @WithMockUser
   public void update_shouldReturnBadRequest_whenMalformedId() throws Exception {
-    when(sessionMapper.toDto(session)).thenReturn(sessionDto);
-    
     mockMvc.perform(MockMvcRequestBuilders.put("/api/session/one").contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(sessionDto)))
+        .content(objectMapper.writeValueAsString(sessionDto))).andExpect(status().isBadRequest());
+  }
+
+  /**
+   * Tests that delete method returns a successful response.
+   * 
+   * @throws Exception if simulated call to the end point fails.
+   */
+  @Test
+  @WithMockUser
+  public void delete_shouldSucceedRequest() throws Exception {
+    Long id = 1L;
+
+    when(sessionService.getById(id)).thenReturn(session);
+
+    mockMvc.perform(MockMvcRequestBuilders.delete("/api/session/" + id)).andExpect(status().isOk());
+  }
+
+  /**
+   * Tests that delete method returns a bad request response when the given id is
+   * malformed.
+   * 
+   * @throws Exception if simulated call to the end point fails.
+   */
+  @Test
+  @WithMockUser
+  public void delete_shouldReturnBadRequest_whenMalformedId() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.delete("/api/session/one")).andExpect(status().isBadRequest());
+  }
+
+  /**
+   * Tests that delete method returns a not found response when the session with
+   * the given id doesn't exist.
+   * 
+   * @throws Exception if simulated call to the end point fails.
+   */
+  @Test
+  @WithMockUser
+  public void delete_shouldReturnNotFound_whenSessionDoesntExist() throws Exception {
+    Long id = 2L;
+
+    when(sessionService.getById(id)).thenReturn(null);
+
+    mockMvc.perform(MockMvcRequestBuilders.delete("/api/session/" + id).accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isNotFound());
+  }
+
+  /**
+   * Tests that participate method returns a successful response.
+   * 
+   * @throws Exception if simulated call to the end point fails.
+   */
+  @Test
+  @WithMockUser
+  public void participate_shouldSucceedRequest() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.post("/api/session/1/participate/1").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk());
+  }
+
+  /**
+   * Tests that participate method returns a bad request response when a given id
+   * is malformed.
+   * 
+   * @throws Exception if simulated call to the end point fails.
+   */
+  @Test
+  @WithMockUser
+  public void participate_shouldReturnBadRequest_whenMalformedId() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.post("/api/session/one/participate/two")).andExpect(status().isBadRequest());
+  }
+
+  /**
+   * Tests that noLongerParticipate method returns a successful response.
+   * 
+   * @throws Exception if simulated call to the end point fails.
+   */
+  @Test
+  @WithMockUser
+  public void noLongerParticipate_shouldSucceedRequest() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.delete("/api/session/1/participate/1").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk());
+  }
+
+  /**
+   * Tests that noLongerParticipate method returns a bad request response when a
+   * given id is malformed.
+   * 
+   * @throws Exception if simulated call to the end point fails.
+   */
+  @Test
+  @WithMockUser
+  public void noLongerParticipate_shouldReturnBadRequest_whenMalformedId() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.delete("/api/session/one/participate/two"))
         .andExpect(status().isBadRequest());
   }
 
