@@ -143,8 +143,10 @@ public class SessionControllerIT {
     when(sessionMapper.toDto(session)).thenReturn(sessionDto);
 
     mockMvc
-        .perform(MockMvcRequestBuilders.post("/api/session")
-            .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(sessionDto)))
+        .perform(MockMvcRequestBuilders.post("/api/session").contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(sessionDto)))
+        .andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(sessionDto)));
+  }
 
   /**
    * Tests that update method returns a 200 response with the updated session.
