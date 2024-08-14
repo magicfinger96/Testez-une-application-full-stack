@@ -27,7 +27,7 @@ import com.openclassrooms.starterjwt.repository.SessionRepository;
 import com.openclassrooms.starterjwt.repository.UserRepository;
 
 /**
- * Class that tests SessionService
+ * Class that tests {@link SessionService}.
  */
 @ExtendWith(MockitoExtension.class)
 public class SessionServiceTest {

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * Tests UserDetailsImpl class.
+ * Tests {@link UserDetailsImpl} class.
  */
 public class UserDetailsImplTest {
 

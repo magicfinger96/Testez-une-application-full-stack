@@ -19,7 +19,7 @@ import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.repository.UserRepository;
 
 /**
- * Class that tests UserService
+ * Class that tests {@link UserService}.
  */
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {

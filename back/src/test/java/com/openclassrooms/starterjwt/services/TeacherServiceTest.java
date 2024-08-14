@@ -19,7 +19,7 @@ import com.openclassrooms.starterjwt.models.Teacher;
 import com.openclassrooms.starterjwt.repository.TeacherRepository;
 
 /**
- * Class that tests TeacherService
+ * Class that tests {@link TeacherService}.
  */
 @ExtendWith(MockitoExtension.class)
 public class TeacherServiceTest {
