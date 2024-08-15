@@ -30,7 +30,7 @@ import com.openclassrooms.starterjwt.services.SessionService;
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SessionControllerIT {
+public class SessionControllerIntegrationTest {
 
   @MockBean
   private SessionMapper sessionMapper;

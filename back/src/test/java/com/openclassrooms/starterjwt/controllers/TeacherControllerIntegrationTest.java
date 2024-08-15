@@ -29,7 +29,7 @@ import com.openclassrooms.starterjwt.services.TeacherService;
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TeacherControllerIT {
+public class TeacherControllerIntegrationTest {
 
   @MockBean
   private TeacherMapper teacherMapper;

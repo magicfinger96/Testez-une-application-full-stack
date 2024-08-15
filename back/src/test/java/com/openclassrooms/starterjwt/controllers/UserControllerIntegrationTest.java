@@ -26,7 +26,7 @@ import com.openclassrooms.starterjwt.services.UserService;
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerIT {
+public class UserControllerIntegrationTest {
 
   @MockBean
   private UserMapper userMapper;

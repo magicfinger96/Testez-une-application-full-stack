@@ -36,7 +36,7 @@ import com.openclassrooms.starterjwt.security.services.UserDetailsImpl;
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AuthControllerIT {
+public class AuthControllerIntegrationTest {
 
   @MockBean
   private AuthenticationManager authenticationManager;
