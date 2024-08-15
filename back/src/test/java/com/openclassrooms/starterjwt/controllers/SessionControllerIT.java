@@ -93,7 +93,7 @@ public class SessionControllerIT {
   public void findById_shouldSucceedRequestWithASession() throws Exception {
     Long id = session.getId();
 
-    when(sessionService.getById(Long.valueOf(id))).thenReturn(session);
+    when(sessionService.getById(id)).thenReturn(session);
     when(sessionMapper.toDto(session)).thenReturn(sessionDto);
 
     mockMvc.perform(MockMvcRequestBuilders.get("/api/session/" + id).accept(MediaType.APPLICATION_JSON))
