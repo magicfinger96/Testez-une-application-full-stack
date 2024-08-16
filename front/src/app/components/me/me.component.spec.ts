@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {
   ComponentFixture,
   fakeAsync,
+  flush,
   TestBed,
   tick,
 } from '@angular/core/testing';
@@ -18,6 +19,7 @@ import { User } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('MeComponent', () => {
   let component: MeComponent;
@@ -28,12 +30,12 @@ describe('MeComponent', () => {
       admin: false,
       id: 1,
     },
-    logOut: jest.fn() 
+    logOut: jest.fn().mockResolvedValue(undefined) 
   };
 
   const mockUserService = {
     getById: jest.fn(),
-    delete: jest.fn()
+    delete: jest.fn().mockReturnValue(of(undefined))
   };
 
   const user: User = {
@@ -57,6 +59,7 @@ describe('MeComponent', () => {
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
+        NoopAnimationsModule
       ],
       providers: [
         { provide: SessionService, useValue: mockSessionService },
@@ -137,12 +140,11 @@ describe('MeComponent', () => {
       tick();
       expect(component.back).toHaveBeenCalled();
       expect(window.history.back).toHaveBeenCalled();
+
+      flush();
     }));
 
     it('should call delete method then userService delete method when hitting delete button', fakeAsync(() => {
-      mockUserService.delete.mockReturnValue(of());
-      mockSessionService.logOut.mockResolvedValue(undefined);
-
       jest.spyOn(component, 'delete');
       jest.spyOn(mockSessionService, 'logOut');
 
@@ -151,9 +153,12 @@ describe('MeComponent', () => {
       );
       button.click();
       tick();
+
       expect(component.delete).toHaveBeenCalled();
       expect(mockUserService.delete).toHaveBeenCalledWith(mockSessionService.sessionInformation.id.toString());
-      expect(mockSessionService.logOut).toHaveBeenCalled(); // Erreur 
+      expect(mockSessionService.logOut).toHaveBeenCalled();
+
+      flush();
     }));
 
   });
