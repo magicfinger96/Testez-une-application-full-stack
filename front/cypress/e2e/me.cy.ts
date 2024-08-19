@@ -13,7 +13,7 @@ describe('Me spec', () => {
     cy.login('yoga@studio.com', 'test!1234');
   });
 
-  it('Display user details page successfully', () => {
+  it('should display user details page successfully', () => {
     cy.intercept('GET', '/api/user/1', {
       fixture: 'user.json',
     });
