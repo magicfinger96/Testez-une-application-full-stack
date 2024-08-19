@@ -3,7 +3,7 @@
     "email": "jane.doe@live.fr",
     "firstName": "jane",
     "lastName": "doe",
-    "admin": "false",
+    "admin": false,
     "password": "password",
     "createdAt": "2024-08-19 00:00:00",
     "updatedAt": "2024-08-19 00:00:00"
