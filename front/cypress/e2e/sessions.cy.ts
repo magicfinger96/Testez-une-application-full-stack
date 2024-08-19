@@ -62,11 +62,11 @@ describe('Sessions spec', () => {
     cy.get('textarea[formControlName=description]').clear().type("The updated description");
 
 
-    cy.intercept('PUT', '/api/session/1', {}).as('updateUserCall');
+    cy.intercept('PUT', '/api/session/1', {}).as('updateSessionCall');
 
     cy.get('button[type="submit"]').click();
 
-    cy.wait('@updateUserCall').then((interception) => {
+    cy.wait('@updateSessionCall').then((interception) => {
       expect(interception.request.body).to.deep.equal({
         name: "Session 1",
         date: "2024-09-19",
