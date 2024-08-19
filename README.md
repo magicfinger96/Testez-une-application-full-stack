@@ -19,8 +19,10 @@
 
 ## Testing:
 ### Front: Unit Tests and Integration Tests
-- Run `npm run test` inside `front` folder to run the Jest tests.
-- The coverage will be generated here: `front\coverage\lcov-report\index.html`
+- Run `npx jest --coverage` inside `front` folder to run the Jest tests.
+- The coverage will be generated here: `front\coverage\jest\lcov-report\index.html`
+ ![image](https://github.com/user-attachments/assets/c990ef8b-3ab3-4fe1-80f9-5b5e0db804f2)
+
   
 ### Front: E2E tests
 - Run `npm run e2e:ci` inside `front` folder to run the E2E tests and create coverage file
