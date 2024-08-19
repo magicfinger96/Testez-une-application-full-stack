@@ -78,4 +78,31 @@ describe('Sessions spec', () => {
     cy.url().should('equal', Cypress.config('baseUrl') + 'sessions');
 
   });
+
+  it('should be able to delete a session as an admin user', () => {
+    cy.intercept('GET', '/api/user/1', {
+      fixture: 'user.json',
+    });
+
+    cy.intercept('GET', '/api/teacher/1', {
+      fixture: 'teacher.json',
+    });
+
+    cy.intercept('GET', '/api/session/1', {
+      fixture: 'session.json',
+    });
+
+    cy.get('button').contains('Detail').should('be.visible');
+    cy.get('button').contains('Detail').click();
+    cy.url().should('include', '/sessions/detail/1');
+
+    cy.intercept('DELETE', '/api/session/1', {}).as('deleteSessionCall');
+
+    cy.get('button').contains('Delete').should('be.visible');
+    cy.get('button').contains('Delete').click();
+
+    cy.url().should('equal', Cypress.config('baseUrl') + 'sessions');
+
+  });
+
 });
