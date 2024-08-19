@@ -18,16 +18,16 @@
 - Execute `mvn spring-boot:run` (If `mvn` is not recognized, follow instructions [here](https://www.baeldung.com/install-maven-on-windows-linux-mac))
 
 ## Testing:
-# Front: Unit Tests and Integration Tests
+### Front: Unit Tests and Integration Tests
 - Run `npm run test` inside `front` folder to run the Jest tests.
-- The coverage will be generated here: `front\coverage\lcov-report\index.html`.
+- The coverage will be generated here: `front\coverage\lcov-report\index.html`
   
-# Front: E2E tests
+### Front: E2E tests
 - Run `npm run e2e:ci` inside `front` folder to run the E2E tests and create coverage file
-- The coverage will be generated here: `front\coverage\lcov-report\index.html`.
+- The coverage will be generated here: `front\coverage\lcov-report\index.html`
  ![image](https://github.com/user-attachments/assets/a4887109-4a71-482e-9b15-d64c56983fa0)
 
-# Back:
+### Back:
 - Run `mvn clean test` inside `back` folder to run Unit tests and integration tests.
 - Retrieve the coverage here: `back/target/site/jacoco/index.html`
   ![image](https://github.com/user-attachments/assets/afc987de-a569-4242-bef1-b77e7cd0b06f)
